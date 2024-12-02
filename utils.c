@@ -6,7 +6,7 @@
 /*   By: igorda-c <igorda-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 17:37:31 by igorda-c          #+#    #+#             */
-/*   Updated: 2024/11/11 19:54:37 by igorda-c         ###   ########.fr       */
+/*   Updated: 2024/11/29 19:09:24 by igorda-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	exit_handler(int n_exit)
 {
 	if (n_exit == 1)
 		ft_putstr_fd("./pipex infile cmd outfile\n", 2);
-	exit(0);
+	exit(EXIT_FAILURE);
 }
 
 int	open_file(char *file, int in_or_out)
 {
 	int	ret;
-	
+
 	if (in_or_out == 0)
 		ret = open(file, O_RDONLY);
 	if (in_or_out == 1)
@@ -35,7 +35,7 @@ int	open_file(char *file, int in_or_out)
 void	ft_free_tab(char **tab)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (tab[i])
 	{

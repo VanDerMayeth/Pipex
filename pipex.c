@@ -6,7 +6,7 @@
 /*   By: igorda-c <igorda-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 17:37:08 by igorda-c          #+#    #+#             */
-/*   Updated: 2024/11/11 19:53:18 by igorda-c         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:49:48 by igorda-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ void	exec(char *cmd, char **env)
 
 	s_cmd = ft_split(cmd, ' ');
 	path = get_path(s_cmd[0], env);
-	if (execve(path, s_cmd, env) == -1)
+	if (execve(path, s_cmd, env) != 0)
 	{
 		ft_putstr_fd("pipex: command not found: ", 2);
 		ft_putendl_fd(s_cmd[0], 2);
 		ft_free_tab(s_cmd);
-		exit(0);
+		exit(1);
 	}
 }
 
@@ -55,7 +55,9 @@ int	main(int ac, char **av, char **env)
 	int		p_fd[2];
 	pid_t	pid;
 
-	if (ac != 5)
+	if (env[0] == NULL)
+		exit(1);
+	if (ac != 5 || ft_strcmp (av[2], "") == 0 || ft_strcmp (av[3], "") == 0)
 		exit_handler(1);
 	if (pipe(p_fd) == -1)
 		exit(-1);
